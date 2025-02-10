@@ -22,13 +22,32 @@ def on_button_pressed_b():
     OLED.write_string_new_line("Knopf B")
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
-OLED.init(128, 64)
-RTC_DS1307.set_time(RTC_DS1307.TimeType.SECOND, 50)
-RTC_DS1307.set_time(RTC_DS1307.TimeType.MINUTE, 12)
-RTC_DS1307.set_time(RTC_DS1307.TimeType.HOUR, 11)
+def on_button_pressed_ab():
+    OLED.clear()
+    RTC_DS1307.set_time(RTC_DS1307.TimeType.YEAR, 2025)
+    RTC_DS1307.set_time(RTC_DS1307.TimeType.MONTH, 2)
+    RTC_DS1307.set_time(RTC_DS1307.TimeType.DAY, 10)
 
-RTC_DS1307.set_time(RTC_DS1307.TimeType.DAY, 9)
-RTC_DS1307.set_time(RTC_DS1307.TimeType.MONTH, 2)
-RTC_DS1307.set_time(RTC_DS1307.TimeType.YEAR, 2025)
+    RTC_DS1307.set_time(RTC_DS1307.TimeType.HOUR, 21)
+    RTC_DS1307.set_time(RTC_DS1307.TimeType.MINUTE, 10)
+    RTC_DS1307.set_time(RTC_DS1307.TimeType.SECOND, 0)
+
+    OLED.write_string_new_line(
+        "Uhrzeit gesetzt: " 
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR) + "-"
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH) + "-"
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY) + "-"
+        + " "
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR) + ":"
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE) + ":"
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE) + ":"
+        + RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND))
+input.on_button_pressed(Button.AB, on_button_pressed_ab)
+
+
+
+
+
+
 
 
