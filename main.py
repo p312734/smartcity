@@ -1,13 +1,12 @@
+def zeroPad(num: number, length: number):
+    numStr = str(num)
+    while len(numStr) < length:
+        numStr = "0" + numStr
+    return numStr
+
 def on_logo_pressed():
     basic.show_string("L")
-    
-    OLED.write_string_new_line(
-        str(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR)) + "-"
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH)).zfill(2) + "-"
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY)).zfill(2) + " "
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR)).zfill(2) + ":"
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE)).zfill(2) + ":"
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND)).zfill(2))
+    OLED.write_string_new_line("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR)) + "-" + zeroPad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH), 3))
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def on_button_pressed_a():
@@ -23,14 +22,7 @@ def on_button_pressed_ab():
     RTC_DS1307.set_time(RTC_DS1307.TimeType.HOUR, 21)
     RTC_DS1307.set_time(RTC_DS1307.TimeType.MINUTE, 20)
     RTC_DS1307.set_time(RTC_DS1307.TimeType.SECOND, 0)
-    OLED.write_string_new_line(
-        "Uhrzeit gesetzt: "  
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR)) + "-" 
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH)) + "-" 
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY)) + " " 
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR)) + ":" 
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE)) + ":"  
-        + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND)))
+    OLED.write_string_new_line("Uhrzeit gesetzt: " + ("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR))) + "-" + ("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH))) + "-" + ("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY))) + " " + ("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR))) + ":" + ("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE))) + ":" + ("" + str(RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND))))
 input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def on_button_pressed_b():
