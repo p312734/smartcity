@@ -1,6 +1,14 @@
+function zeroPad(num: number, length: number): string {
+    let numStr = num.toString();
+    while (numStr.length < length) {
+        numStr = "0" + numStr;
+    }
+    return numStr;
+}
+
 input.onLogoEvent(TouchButtonEvent.Pressed, function on_logo_pressed() {
     basic.showString("L")
-    OLED.writeStringNewLine("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.YEAR) + "-" + _py.py_string_zfill("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.MONTH), 2) + "-" + _py.py_string_zfill("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.DAY), 2) + " " + _py.py_string_zfill("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.HOUR), 2) + ":" + _py.py_string_zfill("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.MINUTE), 2) + ":" + _py.py_string_zfill("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.SECOND), 2))
+    OLED.writeStringNewLine("" + RTC_DS1307.getTime(RTC_DS1307.TimeType.YEAR) + "-" + zeroPad(RTC_DS1307.getTime(RTC_DS1307.TimeType.MONTH), 3));
 })
 input.onButtonPressed(Button.A, function on_button_pressed_a() {
     basic.showString("A")
