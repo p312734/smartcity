@@ -38,5 +38,6 @@ basic.forever(function () {
     OLED.clear()
     OLED.writeStringNewLine("" + getdatetimestr() + ":" + "")
     OLED.writeStringNewLine(convertToText(Environment.dht11value(Environment.DHT11Type.DHT11_temperature_C, DigitalPin.P1)))
+    OLED.writeStringNewLine(convertToText(input.temperature()))
     basic.pause(5000)
 })
