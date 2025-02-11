@@ -4,16 +4,14 @@ def zeropad(num: int, length: int) -> str:
         num_str = "0" + num_str
     return num_str
 
+def getdatetimestr() -> str:
+    strdatetime = zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR), 4) + "-" + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH), 2) + "-"  + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY), 2) + " "  + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR), 2) + ":" + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE), 2) + ":" + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND), 2)
+    return strdatetime
+
 def on_logo_pressed():
     basic.show_string("L")
     
-    OLED.write_string_new_line(
-        zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR), 4) + "-"
-        + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH), 2) + "-"
-        + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY), 2) + " "
-        + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR), 2) + ":"
-        + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE), 2) + ":"
-        + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND), 2))
+    OLED.write_string_new_line(getdatetimestr())
 input.on_logo_event(TouchButtonEvent.PRESSED, on_logo_pressed)
 
 def on_button_pressed_a():
@@ -31,12 +29,7 @@ def on_button_pressed_ab():
     RTC_DS1307.set_time(RTC_DS1307.TimeType.SECOND, 0)
     OLED.write_string_new_line(
         "Uhrzeit gesetzt: "
-                + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.YEAR), 4) + "-"
-                + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MONTH), 2) + "-"
-                + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.DAY), 2) + " "
-                + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.HOUR), 2) + ":"
-                + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.MINUTE), 2) + ":"
-                + zeropad(RTC_DS1307.get_time(RTC_DS1307.TimeType.SECOND), 2))
+                + getdatetimestr())
 input.on_button_pressed(Button.AB, on_button_pressed_ab)
 
 def on_button_pressed_b():
