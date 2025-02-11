@@ -35,6 +35,8 @@ let num_str = ""
 let strdatetime = ""
 OLED.init(128, 64)
 basic.forever(function () {
-    OLED.writeStringNewLine("" + getdatetimestr() + "|" + Environment.dht11value(Environment.DHT11Type.DHT11_temperature_C, DigitalPin.P1))
+    OLED.clear()
+    OLED.writeStringNewLine("" + getdatetimestr() + ":" + "")
+    OLED.writeStringNewLine(convertToText(Environment.dht11value(Environment.DHT11Type.DHT11_temperature_C, DigitalPin.P1)))
     basic.pause(5000)
 })
