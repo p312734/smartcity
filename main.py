@@ -38,3 +38,12 @@ def on_button_pressed_b():
 input.on_button_pressed(Button.B, on_button_pressed_b)
 
 OLED.init(128, 64)
+datalogger.set_column_titles("datetime", "temperature_microbit", "temperatue_dht11")
+
+def on_every_interval():
+    datalogger.include_timestamp(FlashLogTimeStampFormat.SECONDS)
+    datalogger.log(datalogger.create_cv("temperature", input.temperature()),
+        datalogger.create_cv("light", input.light_level()))
+    basic.clear_screen()
+    Environment.led_brightness(AnalogPin.P2, False)
+loops.every_interval(5000, on_every_interval)
